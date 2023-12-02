@@ -42,9 +42,32 @@ def part1(games):
             idSums += index + 1
     return(idSums)
 
+def part2(games):
+    powerSum = 0
+    for game in games:
+        redCubes = 0
+        greenCubes = 0
+        blueCubes = 0
+        for setGrab in game:
+            for indGrab in setGrab:
+                match indGrab[1]:
+                    case 'red':
+                        if int(indGrab[0]) > redCubes:
+                            redCubes = int(indGrab[0])
+                    case 'green':
+                        if int(indGrab[0]) > greenCubes:
+                            greenCubes = int(indGrab[0])
+                    case 'blue':
+                        if int(indGrab[0]) > blueCubes:
+                            blueCubes = int(indGrab[0])
+        powerSum += redCubes*blueCubes*greenCubes
+    return(powerSum)
+
+
 def main():
     games = getGames()
     print('Part 1 Solution: ' + str(part1(games)))
+    print('Part 2 Soluction: ' + str(part2(games)))
 
 if __name__ == '__main__':
     main()
