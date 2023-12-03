@@ -34,7 +34,6 @@ def numCheck(matrix,row,col,num):
             foundSymbol = checkForSymbol(matrix[row - 1][col + i + 1])
         #check right
         if not col + i == len(matrix[0]) - 1 and not foundSymbol:
-            if num == "3": print(col)
             foundSymbol = checkForSymbol(matrix[row][col + i + 1])
         #check right/down
         if not col + i == len(matrix[0]) - 1 and not row + 1  == len(matrix) and not foundSymbol:
