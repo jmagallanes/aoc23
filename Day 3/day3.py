@@ -80,6 +80,11 @@ def buildNumDict(matrix):
                 for i in range(0,len(tempNum)):
                         numDict[(rowIndex,colIndex-i-1)] = tempNum
                 tempNum = ""
+            if colIndex == len(matrix[0]) - 1 and not tempNum == "":
+                start = colIndex-len(tempNum)
+                for i in range(0,len(tempNum)):
+                        numDict[(rowIndex,colIndex-i-1)] = tempNum
+                tempNum = ""
     return numDict
 
 def part2(matrix,numDict):
