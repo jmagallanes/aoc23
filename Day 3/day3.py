@@ -1,6 +1,6 @@
 def buildMatrix():
     matrix = []
-    with open('test.txt') as inputFile:
+    with open('input.txt') as inputFile:
         for line in inputFile:
             line = line.strip()
             row = []
