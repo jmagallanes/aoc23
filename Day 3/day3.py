@@ -98,6 +98,7 @@ def part2(matrix,numDict):
                 else:
                     adjCoordinates.append((rowIndex-1,colIndex-1))
                     adjCoordinates.append((rowIndex-1,colIndex+1))
+                    adjCoordinates.append((rowIndex-1,colIndex))
                 if matrix[rowIndex+1][colIndex-1].isdigit() and matrix[rowIndex+1][colIndex].isdigit() and matrix[rowIndex+1][colIndex+1].isdigit():
                     adjCoordinates.append((rowIndex+1,colIndex-1))
                 elif matrix[rowIndex+1][colIndex-1].isdigit() and matrix[rowIndex+1][colIndex].isdigit():
@@ -107,6 +108,7 @@ def part2(matrix,numDict):
                 else:
                     adjCoordinates.append((rowIndex+1,colIndex-1))
                     adjCoordinates.append((rowIndex+1,colIndex+1))
+                    adjCoordinates.append((rowIndex+1,colIndex))
                 for co in adjCoordinates:
                     if co in numDict.keys():
                         values.append(numDict[co])
