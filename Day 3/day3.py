@@ -1,6 +1,6 @@
 def buildMatrix():
     matrix = []
-    with open('input.txt') as inputFile:
+    with open('test.txt') as inputFile:
         for line in inputFile:
             line = line.strip()
             row = []
@@ -67,13 +67,41 @@ def part1(matrix):
                 tempNum = ""
     return sum
 
-def part2(matrix):
-    return "TBD"
+def buildNumDict(matrix):
+    numDict = {}
+    for rowIndex, row in enumerate(matrix):
+        tempNum = ""
+        num = ""
+        for colIndex, char in enumerate(row):
+            if char.isdigit():
+                tempNum += char
+            elif not tempNum == "":
+                start = colIndex-len(tempNum)
+                for i in range(0,len(tempNum)):
+                        numDict[(rowIndex,colIndex-i-1)] = tempNum
+                tempNum = ""
+    return numDict
+
+def part2(matrix,numDict):
+    answer = 0
+    for rowIndex, row in enumerate(matrix):
+        for colIndex, char in enumerate(row):
+            if matrix[rowIndex][colIndex] == "*":
+                values = []
+                adjCoordinates = [(rowIndex-1,colIndex-1),(rowIndex-1,colIndex),(rowIndex-1,colIndex+1),(rowIndex,colIndex-1),(rowIndex,colIndex+1),(rowIndex+1,colIndex-1),(rowIndex+1,colIndex),(rowIndex+1,colIndex+1)]
+                for co in adjCoordinates:
+                    if co in numDict.keys():
+                        values.append(numDict[co])
+                values = list(set(values))
+                if len(values) > 1:
+                    answer += int(values[0])*int(values[1])
+    return answer
 
 def main():
     matrix = buildMatrix()
+    numDict = buildNumDict(matrix)
     print('Part 1 Solution: ' + str(part1(matrix)))
-    print('Part 2 Soluction: ' + str(part2(matrix)))
+    print('Part 2 Soluction: ' + str(part2(matrix,numDict)))
 
 if __name__ == '__main__':
     main()
