@@ -1,6 +1,6 @@
 def buildMatrix():
     matrix = []
-    with open('test.txt') as inputFile:
+    with open('input.txt') as inputFile:
         for line in inputFile:
             line = line.strip()
             row = []
@@ -43,12 +43,13 @@ def numCheck(matrix,row,colIndex,num):
         if not row + 1 == len(matrix) and not foundSymbol:
             foundSymbol = checkForSymbol(matrix[row+1][start + i])
         #check down/left
-        if not start + i -1 == 0 and not row +1 == len(matrix) and not foundSymbol:
+        if not start + i == 0 and not row +1 == len(matrix) and not foundSymbol:
             foundSymbol = checkForSymbol(matrix[row+1][start + i - 1])
         #check left
-        if not start + i - 1 == 0 and not foundSymbol:
+        if not start + i == 0 and not foundSymbol:
             foundSymbol = checkForSymbol(matrix[row][start + i - 1])
         if foundSymbol:
+            print(num)
             return(int(num))
     return 0
 
