@@ -1,4 +1,8 @@
 #Template python file for each day.
+def parseFile():
+    with open('input.txt') as inputFile:
+        for line in inputFile:
+            line = line.strip()
 
 def part1():
     return True
