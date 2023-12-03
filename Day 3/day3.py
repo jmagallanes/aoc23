@@ -1,6 +1,6 @@
 def buildMatrix():
     matrix = []
-    with open('input.txt') as inputFile:
+    with open('test.txt') as inputFile:
         for line in inputFile:
             line = line.strip()
             row = []
@@ -20,36 +20,34 @@ def checkForSymbol(char):
         return True
 
 
-def numCheck(matrix,row,colIndex,num):
-    start = colIndex - len(num)
+def numCheck(matrix,row,col,num):
     foundSymbol = False
     for i in range(0, len(num)):
         #check left/up
-        if not start + i == 0 and not row == 0 and not foundSymbol:
-            foundSymbol = checkForSymbol(matrix[row-1][start + i-1])
+        if not col + i == 0 and not row == 0 and not foundSymbol:
+            foundSymbol = checkForSymbol(matrix[row - 1][col + i - 1])
         #check up
         if not row == 0 and not foundSymbol:
-            foundSymbol = checkForSymbol(matrix[row-1][start + i])
+            foundSymbol = checkForSymbol(matrix[row - 1][col + i])
         # #check up/right
-        if not start + i == len(matrix[0]) and not row == 0 and not foundSymbol:
-            foundSymbol = checkForSymbol(matrix[row-1][start + i + 1])
+        if not col + i == len(matrix[0]) and not row == 0 and not foundSymbol:
+            foundSymbol = checkForSymbol(matrix[row - 1][col + i + 1])
         #check right
-        if not start + i == len(matrix[0]) and not foundSymbol:
-            foundSymbol = checkForSymbol(matrix[row][start + i + 1])
+        if not col + i == len(matrix[0]) and not foundSymbol:
+            foundSymbol = checkForSymbol(matrix[row][col + i + 1])
         #check right/down
-        if not start + i == len(matrix[0]) and not row + 1  == len(matrix) and not foundSymbol:
-            foundSymbol = checkForSymbol(matrix[row+1][start + i + 1])
+        if not col + i == len(matrix[0]) and not row + 1  == len(matrix) and not foundSymbol:
+            foundSymbol = checkForSymbol(matrix[row + 1][col + i + 1])
         #check down
         if not row + 1 == len(matrix) and not foundSymbol:
-            foundSymbol = checkForSymbol(matrix[row+1][start + i])
+            foundSymbol = checkForSymbol(matrix[row + 1][col + i])
         #check down/left
-        if not start + i == 0 and not row +1 == len(matrix) and not foundSymbol:
-            foundSymbol = checkForSymbol(matrix[row+1][start + i - 1])
+        if not col + i == 0 and not row +1 == len(matrix) and not foundSymbol:
+            foundSymbol = checkForSymbol(matrix[row + 1][col + i - 1])
         #check left
-        if not start + i == 0 and not foundSymbol:
-            foundSymbol = checkForSymbol(matrix[row][start + i - 1])
+        if not col + i == 0 and not foundSymbol:
+            foundSymbol = checkForSymbol(matrix[row][col + i - 1])
         if foundSymbol:
-            print(num)
             return(int(num))
     return 0
 
@@ -62,10 +60,10 @@ def part1(matrix):
             if char.isdigit():
                 tempNum += char
             elif not tempNum == "":
-                sum += numCheck(matrix,rowIndex,colIndex,tempNum)
+                sum += numCheck(matrix,rowIndex,colIndex-len(tempNum),tempNum)
                 tempNum = ""
             if colIndex == len(matrix[0]) - 1 and not tempNum == "":
-                sum += numCheck(matrix,rowIndex,colIndex,tempNum)
+                sum += numCheck(matrix,rowIndex,colIndex-len(tempNum),tempNum)
                 tempNum = ""
     return sum
 
