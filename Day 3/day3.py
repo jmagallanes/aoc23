@@ -25,31 +25,35 @@ def numCheck(matrix,row,colIndex,num):
     foundSymbol = False
     for i in range(0, len(num)):
         #check left/up
-        if not start + i == 0 and not row == 0:
-            checkForSymbol(matrix[row-1][start + i-1])
+        if not start + i == 0 and not row == 0 and not foundSymbol:
+            foundSymbol = checkForSymbol(matrix[row-1][start + i-1])
         #check up
-        if not row == 0:
-            checkForSymbol(matrix[row-1][start + i])
+        if not row == 0 and not foundSymbol:
+            foundSymbol = checkForSymbol(matrix[row-1][start + i])
         # #check up/right
-        if not start + i == len(matrix[0]) and not row == 0:
-            checkForSymbol(matrix[row-1][start + i + 1])
+        if not start + i == len(matrix[0]) and not row == 0 and not foundSymbol:
+            foundSymbol = checkForSymbol(matrix[row-1][start + i + 1])
         #check right
-        if not start + i == len(matrix[0]):
-            checkForSymbol(matrix[row][start + i + 1])
+        if not start + i == len(matrix[0]) and not foundSymbol:
+            foundSymbol = checkForSymbol(matrix[row][start + i + 1])
         #check right/down
-        if not start + i == len(matrix[0]) and not row + 1  == len(matrix):
-            checkForSymbol(matrix[row+1][start + i + 1])
+        if not start + i == len(matrix[0]) and not row + 1  == len(matrix) and not foundSymbol:
+            foundSymbol = checkForSymbol(matrix[row+1][start + i + 1])
         #check down
-        if not row + 1 == len(matrix):
-            checkForSymbol(matrix[row+1][start + i])
+        if not row + 1 == len(matrix) and not foundSymbol:
+            foundSymbol = checkForSymbol(matrix[row+1][start + i])
         #check down/left
-        if not start + i -1 == 0 and not row +1 == len(matrix):
-            checkForSymbol(matrix[row+1][start + i - 1])
+        if not start + i -1 == 0 and not row +1 == len(matrix) and not foundSymbol:
+            foundSymbol = checkForSymbol(matrix[row+1][start + i - 1])
         #check left
-        if not start + i - 1 == 0:
-            checkForSymbol(matrix[row][start + i - 1])
+        if not start + i - 1 == 0 and not foundSymbol:
+            foundSymbol = checkForSymbol(matrix[row][start + i - 1])
+        if foundSymbol:
+            return(int(num))
+    return 0
 
 def part1(matrix):
+    sum = 0
     for rowIndex, row in enumerate(matrix):
         tempNum = ""
         num = ""
@@ -57,11 +61,12 @@ def part1(matrix):
             if char.isdigit():
                 tempNum += char
             elif not tempNum == "":
-                numCheck(matrix,rowIndex,colIndex,tempNum)
+                sum += numCheck(matrix,rowIndex,colIndex,tempNum)
                 tempNum = ""
             if colIndex == len(matrix[0]) - 1 and not tempNum == "":
-                numCheck(matrix,rowIndex,colIndex,tempNum)
+                sum += numCheck(matrix,rowIndex,colIndex,tempNum)
                 tempNum = ""
+    return sum
 
 def part2(matrix):
     return "TBD"
