@@ -10,7 +10,16 @@ def buildMatrix():
     return(matrix)
 
 def part1(matrix):
-    return "TBD"
+    for rowIndex, row in enumerate(matrix):
+        tempNum = ""
+        num = ""
+        for colIndex, char in enumerate(row):
+            if char.isdigit():
+                tempNum += char
+            else:
+                if not tempNum == "":
+                    print(tempNum + " " + str(rowIndex) + ", " + str(colIndex))
+                tempNum = ""
 
 def part2(matrix):
     return "TBD"
