@@ -88,12 +88,29 @@ def part2(matrix,numDict):
         for colIndex, char in enumerate(row):
             if matrix[rowIndex][colIndex] == "*":
                 values = []
-                adjCoordinates = [(rowIndex-1,colIndex-1),(rowIndex-1,colIndex),(rowIndex-1,colIndex+1),(rowIndex,colIndex-1),(rowIndex,colIndex+1),(rowIndex+1,colIndex-1),(rowIndex+1,colIndex),(rowIndex+1,colIndex+1)]
+                adjCoordinates = [(rowIndex,colIndex-1),(rowIndex,colIndex+1)]
+                if matrix[rowIndex-1][colIndex-1].isdigit() and matrix[rowIndex-1][colIndex].isdigit() and matrix[rowIndex-1][colIndex+1].isdigit():
+                    adjCoordinates.append((rowIndex-1,colIndex-1))
+                elif matrix[rowIndex-1][colIndex-1].isdigit() and matrix[rowIndex-1][colIndex].isdigit():
+                    adjCoordinates.append((rowIndex-1,colIndex-1))
+                elif matrix[rowIndex-1][colIndex].isdigit() and matrix[rowIndex-1][colIndex+1].isdigit():
+                    adjCoordinates.append((rowIndex-1,colIndex))
+                else:
+                    adjCoordinates.append((rowIndex-1,colIndex-1))
+                    adjCoordinates.append((rowIndex-1,colIndex+1))
+                if matrix[rowIndex+1][colIndex-1].isdigit() and matrix[rowIndex+1][colIndex].isdigit() and matrix[rowIndex+1][colIndex+1].isdigit():
+                    adjCoordinates.append((rowIndex+1,colIndex-1))
+                elif matrix[rowIndex+1][colIndex-1].isdigit() and matrix[rowIndex+1][colIndex].isdigit():
+                    adjCoordinates.append((rowIndex+1,colIndex-1))
+                elif matrix[rowIndex+1][colIndex].isdigit() and matrix[rowIndex+1][colIndex+1].isdigit():
+                    adjCoordinates.append((rowIndex+1,colIndex))
+                else:
+                    adjCoordinates.append((rowIndex+1,colIndex-1))
+                    adjCoordinates.append((rowIndex+1,colIndex+1))
                 for co in adjCoordinates:
                     if co in numDict.keys():
                         values.append(numDict[co])
-                values = list(set(values))
-                if len(values) > 1:
+                if len(values) == 2:
                     answer += int(values[0])*int(values[1])
     return answer
 
