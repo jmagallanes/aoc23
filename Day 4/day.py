@@ -1,7 +1,7 @@
 def getNums():
     wNums = []
     mNums = []
-    with open('test.txt') as inputFile:
+    with open('input.txt') as inputFile:
         for line in inputFile:
             line = line.strip()
             nums = line.split(':')[1]
