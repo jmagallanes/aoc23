@@ -5,10 +5,10 @@ def parseFile():
             line = line.strip()
 
 def part1():
-    return True
+    return 'TBD'
 
 def part2():
-    return True
+    return 'TBD'
 
 def main():
     print('Part 1 Solution: ' + str(part1()))
