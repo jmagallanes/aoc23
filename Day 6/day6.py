@@ -25,7 +25,12 @@ def part1(data):
     return(answer)
 
 def part2(data):
-    return 'TBD'
+    time = ""
+    distance = ""
+    for index in range(len(data[0])):
+        time = time + data[0][index]
+        distance = distance + data[1][index]
+    return (int(time) - getFirstWin(int(time),int(distance))*2 + 1)
 
 def main():
     data = parseFile()
